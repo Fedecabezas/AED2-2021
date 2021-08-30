@@ -1,3 +1,19 @@
-# AED2-2021
+###Algoritmos
 
-Probando
+##Inserción directa
+
+##Shellsort
+
+##Burbuja
+
+##Quicksort
+
+##Selección Directa
+
+##Heapsort
+
+##Selección por cuentas
+
+##Bucketsort / Binsort
+
+##Radix
