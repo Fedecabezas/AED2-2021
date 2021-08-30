@@ -1,19 +1,19 @@
-###Algoritmos
+### Algoritmos
 
-##Inserción directa
+## Inserción directa
 
-##Shellsort
+## Shellsort
 
-##Burbuja
+## Burbuja
 
-##Quicksort
+## Quicksort
 
-##Selección Directa
+## Selección Directa
 
-##Heapsort
+## Heapsort
 
-##Selección por cuentas
+## Selección por cuentas
 
-##Bucketsort / Binsort
+## Bucketsort / Binsort
 
-##Radix
+## Radix
