@@ -1,6 +1,6 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "c:\\Users\\Rafael\\Downloads\\junit-4.13.2.jar"
+        "dependencies/junit-4.13.2.jar"
     ]
 }
