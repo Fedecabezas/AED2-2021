@@ -93,6 +93,75 @@ public class TClasificador {
         return datosParaClasificar;
     }
 
+    // PARA REVISAR
+    private static int[] ordenarPorSeleccion(int[] datosParaClasificar) {
+        for (int i = 0; i < datosParaClasificar.length; i++) {
+            int indiceDelMenor = i;
+            int claveMenor = datosParaClasificar[i];
+            for (int j = i + 1; j < datosParaClasificar.length; j++) {
+                if (datosParaClasificar[j] < claveMenor) {
+                    indiceDelMenor = j;
+                    claveMenor = datosParaClasificar[j];
+                }
+            }
+            intercambiar(datosParaClasificar, i, indiceDelMenor);
+        }
+        return datosParaClasificar;
+    }
+
+    private static int[] ordenarPorHeapsort(int[] datosParaClasificar) {
+        for (int i = datosParaClasificar.length / 2; i >= 1; i--) {
+            desplazaElemento(datosParaClasificar, i, datosParaClasificar.length);
+        }
+        for (int i = datosParaClasificar.length; i >= 2; i--) {
+            intercambiar(datosParaClasificar, 1, i);
+            desplazaElemento(datosParaClasificar, 1, i);
+        }
+        return datosParaClasificar;
+    }
+
+    private static int[] ordenarPorCuentas(int[] datosParaClasificar, int max, int min) {
+        int[] freqAbs = new int[datosParaClasificar.length];
+        int[] freqAcum = new int[datosParaClasificar.length];
+        for (int i = 0; i < freqAbs.length - 1; i++) {
+            freqAbs[i] = 0;
+        }
+        for (int i = 0; i < freqAbs.length - 1; i++) {
+            freqAbs[datosParaClasificar[i]] += 1;
+        }
+        freqAcum[0] = freqAbs[0];
+        for (int i = 1; i < freqAbs.length - 1; i++) {
+            freqAcum[i] = freqAbs[i] + freqAcum[i - 1];
+        }
+        for (int i = freqAbs.length - 1; i >= 0; i--) {
+            while (freqAbs[i] != 0) {
+                freqAbs[i] -= 1;
+                freqAcum[i] -= 1;
+                datosParaClasificar[freqAcum[i]] = i;
+            }
+        }
+        return datosParaClasificar;
+    }
+
+    private static void desplazaElemento(int[] vector, int primero, int ultimo) {
+        // int actual = primero;
+        // while (actual <= ultimo / 2) {
+        // if (ultimo == 2 * actual) {
+        // if (vector[actual] > vector[2 * actual]) {
+        // intercambiar(vector, actual, 2 * actual);
+        // }
+        // actual = ultimo;
+        // } else {
+        // int menor; // MemorHijo, falta implementar TODO
+        // if (vector[actual] > vector[menor]) {
+        // intercambiar(vector, actual, menor);
+        // } else {
+
+        // }
+        // }
+        // }
+    }
+
     // #region Auxiliares de Heap
 
     private static void armaHeap(int[] datosParaClasificar, int primero, int ultimo) {

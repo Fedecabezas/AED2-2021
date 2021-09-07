@@ -35,4 +35,11 @@ public class GeneradorDatosGenericos {
 		return copiaDescendente;
 	}
 
+	public static int[] generarDatosOrdenados(int TAMANIO_MAX) {
+		int[] copiaOrdenada = new int[TAMANIO_MAX];
+		for (int i = 0; i < TAMANIO_MAX; i++) {
+			copiaOrdenada[i] = i;
+		}
+		return copiaOrdenada;
+	}
 }

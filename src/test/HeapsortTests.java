@@ -8,44 +8,33 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HeapsortTests {
-    private int[] datoAleatorio10;
-    private int[] datoAscendente10;
-    private int[] datoDescendete10;
-    private int[] datoAleatorio100;
-    private int[] datoAscendente100;
-    private int[] datoDescendete100;
-    private int[] datoAleatorio1000;
-    private int[] datoAscendente1000;
-    private int[] datoDescendete1000;
+    int[] datoAleatorio10;
+    int[] datoAscendente10;
+    int[] datoDescendete10;
+    int[] datoAleatorio100;
+    int[] datoAscendente100;
+    int[] datoDescendete100;
+    int[] datoAleatorio1000;
+    int[] datoAscendente1000;
+    int[] datoDescendete1000;
+    int[] datoOrdenado10;
+    int[] datoOrdenado100;
+    int[] datoOrdenado1000;
 
     @Before
     public void init() {
-        int tamanio;
-
-        tamanio = 10;
-        datoAleatorio10 = new int[tamanio];
-        datoAscendente10 = new int[tamanio];
-        datoDescendete10 = new int[tamanio];
-        datoAleatorio10 = generarDatosAleatorios(tamanio);
-        datoAscendente10 = generarDatosAleatorios(tamanio);
-        datoDescendete10 = generarDatosAleatorios(tamanio);
-
-        tamanio = 100;
-        datoAleatorio100 = new int[tamanio];
-        datoAscendente100 = new int[tamanio];
-        datoDescendete100 = new int[tamanio];
-        datoAleatorio100 = generarDatosAleatorios(tamanio);
-        datoAscendente100 = generarDatosAleatorios(tamanio);
-        datoDescendete100 = generarDatosAleatorios(tamanio);
-
-        tamanio = 1000;
-        datoAleatorio1000 = new int[tamanio];
-        datoAscendente1000 = new int[tamanio];
-        datoDescendete1000 = new int[tamanio];
-        datoAleatorio1000 = generarDatosAleatorios(tamanio);
-        datoAscendente1000 = generarDatosAleatorios(tamanio);
-        datoDescendete1000 = generarDatosAleatorios(tamanio);
-
+        datoAleatorio10 = generarDatosAleatorios(10);
+        datoAscendente10 = generarDatosAleatorios(10);
+        datoDescendete10 = generarDatosAleatorios(10);
+        datoAleatorio100 = generarDatosAleatorios(100);
+        datoAscendente100 = generarDatosAleatorios(100);
+        datoDescendete100 = generarDatosAleatorios(100);
+        datoAleatorio1000 = generarDatosAleatorios(1000);
+        datoAscendente1000 = generarDatosAleatorios(1000);
+        datoDescendete1000 = generarDatosAleatorios(1000);
+        datoOrdenado10 = generarDatosOrdenados(10);
+        datoOrdenado100 = generarDatosOrdenados(100);
+        datoOrdenado1000 = generarDatosOrdenados(1000);
     }
 
     // #region Heapsort
@@ -56,9 +45,9 @@ public class HeapsortTests {
         int[] resultado100 = clasificar(datoAleatorio100, METODO_CLASIFICACION_HEAPSORT);
         int[] resultado1000 = clasificar(datoAleatorio1000, METODO_CLASIFICACION_HEAPSORT);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoOrdenado10, resultado10);
+        assertArrayEquals(datoOrdenado100, resultado100);
+        assertArrayEquals(datoOrdenado1000, resultado1000);
     }
 
     @Test
@@ -67,9 +56,9 @@ public class HeapsortTests {
         int[] resultado100 = clasificar(datoAscendente100, METODO_CLASIFICACION_HEAPSORT);
         int[] resultado1000 = clasificar(datoAscendente1000, METODO_CLASIFICACION_HEAPSORT);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoOrdenado10, resultado10);
+        assertArrayEquals(datoOrdenado100, resultado100);
+        assertArrayEquals(datoOrdenado1000, resultado1000);
     }
 
     @Test
@@ -78,9 +67,9 @@ public class HeapsortTests {
         int[] resultado100 = clasificar(datoDescendete100, METODO_CLASIFICACION_HEAPSORT);
         int[] resultado1000 = clasificar(datoDescendete1000, METODO_CLASIFICACION_HEAPSORT);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoOrdenado10, resultado10);
+        assertArrayEquals(datoOrdenado100, resultado100);
+        assertArrayEquals(datoOrdenado1000, resultado1000);
     }
 
     // #endregion
