@@ -6,6 +6,7 @@ public class TClasificador {
     public static final int METODO_CLASIFICACION_BURBUJA = 3;
     public static final int METODO_CLASIFICACION_HEAPSORT = 4;
     public static final int METODO_CLASIFICACION_SELECCION = 5;
+    public static final int METODO_CLASIFICACION_QUICKSORT = 6;
 
     /**
      * Punto de entrada al clasificador
