@@ -28,6 +28,8 @@ public class TClasificador {
                 return ordenarPorHeapSort(datosParaClasificar);
             case METODO_CLASIFICACION_SELECCION:
                 return ordenarPorSeleccion(datosParaClasificar);
+            case METODO_CLASIFICACION_QUICKSORT:
+                return ordenarPorQuickSort(datosParaClasificar,0, datosParaClasificar.length-1);
             default:
                 System.err.println("Este codigo no deberia haberse ejecutado");
                 break;
@@ -93,6 +95,35 @@ public class TClasificador {
         for (int i = datosParaClasificar.length - 1; i > 0; i--) {
             intercambiar(datosParaClasificar, i, 0);
             armaHeap(datosParaClasificar, 0, i - 1);
+        }
+        return datosParaClasificar;
+    }
+
+    private static int[] ordenarPorQuickSort(int[] datosParaClasificar,int derecha, int izquierda){
+        if (datosParaClasificar == null || datosParaClasificar.length == 0){
+            return datosParaClasificar;
+        }
+        if (derecha >= izquierda){
+            return datosParaClasificar;
+        }
+
+        int medio = derecha + (izquierda - derecha) / 2;
+        int pivote = datosParaClasificar[medio];
+
+        int i = derecha;
+        int j = izquierda;
+        while (i <= j)  {
+            while (datosParaClasificar[i] < pivote && i <= j) { i++; }
+            while (datosParaClasificar[j] > pivote) { j--; }
+            if (i <= j) {
+                intercambiar (datosParaClasificar, i, j);
+            }
+        }
+        if (derecha < j){
+            ordenarPorQuickSort(datosParaClasificar, derecha, j);
+        }
+        if (izquierda > i){
+            ordenarPorQuickSort(datosParaClasificar, i, izquierda);
         }
         return datosParaClasificar;
     }
