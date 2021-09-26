@@ -1,11 +1,16 @@
 package Clasificacion;
 
+import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
+
 public class TClasificador {
     public static final int METODO_CLASIFICACION_INSERCION = 1;
     public static final int METODO_CLASIFICACION_SHELL = 2;
     public static final int METODO_CLASIFICACION_BURBUJA = 3;
     public static final int METODO_CLASIFICACION_HEAPSORT = 4;
     public static final int METODO_CLASIFICACION_SELECCION = 5;
+    public static final int METODO_CLASIFICACION_CUENTAS = 6;
 
     /**
      * Punto de entrada al clasificador
@@ -27,6 +32,8 @@ public class TClasificador {
                 return ordenarPorHeapSort(datosParaClasificar);
             case METODO_CLASIFICACION_SELECCION:
                 return ordenarPorSeleccion(datosParaClasificar);
+            case METODO_CLASIFICACION_CUENTAS:
+                return ordenarPorCuentas(datosParaClasificar, maxValue(datosParaClasificar), minValue(datosParaClasificar));
             default:
                 System.err.println("Este codigo no deberia haberse ejecutado");
                 break;
@@ -143,27 +150,63 @@ public class TClasificador {
     //     return datosParaClasificar;
     // }
 
+    // private static int[] ordenarPorCuentas(int[] datosParaClasificar, int max, int min) {
+    //     int[] freqAbs = new int[datosParaClasificar.length];
+    //     int[] freqAcum = new int[datosParaClasificar.length];
+    //     for (int i = 0; i < freqAbs.length - 1; i++) {
+    //         freqAbs[i] = 0;
+    //     }
+    //     for (int i = 0; i < freqAbs.length - 1; i++) {
+    //         freqAbs[datosParaClasificar[i]] += 1;
+    //     }
+    //     freqAcum[0] = freqAbs[0];
+    //     for (int i = 1; i < freqAbs.length - 1; i++) {
+    //         freqAcum[i] = freqAbs[i] + freqAcum[i - 1];
+    //     }
+    //     for (int i = freqAbs.length - 1; i >= 0; i--) {
+    //         while (freqAbs[i] != 0) {
+    //             freqAbs[i] -= 1;
+    //             freqAcum[i] -= 1;
+    //             datosParaClasificar[freqAcum[i]] = i;
+    //         }
+    //     }
+    //     return datosParaClasificar;
+    // }
+
     private static int[] ordenarPorCuentas(int[] datosParaClasificar, int max, int min) {
-        int[] freqAbs = new int[datosParaClasificar.length];
-        int[] freqAcum = new int[datosParaClasificar.length];
-        for (int i = 0; i < freqAbs.length - 1; i++) {
-            freqAbs[i] = 0;
+        int[] cuenta = new int[datosParaClasificar.length];
+        int [] salida = new int[datosParaClasificar.length];
+        for (int i = min; i < max; i++) {
+            cuenta[i] = 0;
         }
-        for (int i = 0; i < freqAbs.length - 1; i++) {
-            freqAbs[datosParaClasificar[i]] += 1;
+        for (int j = 0; j < datosParaClasificar.length; j++) {
+            cuenta[j] += 1;
         }
-        freqAcum[0] = freqAbs[0];
-        for (int i = 1; i < freqAbs.length - 1; i++) {
-            freqAcum[i] = freqAbs[i] + freqAcum[i - 1];
+        for (int i = min + 1; i < max; i++) {
+            cuenta[i] = cuenta[i] + cuenta[i - 1];
         }
-        for (int i = freqAbs.length - 1; i >= 0; i--) {
-            while (freqAbs[i] != 0) {
-                freqAbs[i] -= 1;
-                freqAcum[i] -= 1;
-                datosParaClasificar[freqAcum[i]] = i;
-            }
+        for (int j = datosParaClasificar.length - 1; j >= 0; j--) {
+            int i = cuenta[j];
+            salida[i] = cuenta[j];
+            cuenta[j] = i - 1;
         }
-        return datosParaClasificar;
+        return salida;
+    }
+
+    public static int maxValue(int array[]){
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < array.length; i++) {
+          list.add(array[i]);
+        }
+       return Collections.max(list);
+    }
+
+    public static int minValue(int array[]){
+        List<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < array.length; i++) {
+            list.add(array[i]);
+        }
+        return Collections.min(list);
     }
 
     private static void desplazaElemento(int[] vector, int primero, int ultimo) {
