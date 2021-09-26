@@ -1,4 +1,4 @@
-package uy.edu.ucu.aed2;
+package Arboles;
 
 import java.util.LinkedList;
 

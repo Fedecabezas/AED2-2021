@@ -17,6 +17,9 @@ public class ShellTests {
     private int[] datoAleatorio1000;
     private int[] datoAscendente1000;
     private int[] datoDescendete1000;
+    int[] datoOrdenado10;
+    int[] datoOrdenado100;
+    int[] datoOrdenado1000;
 
     @Before
     public void init() {
@@ -27,25 +30,28 @@ public class ShellTests {
         datoAscendente10 = new int[tamanio];
         datoDescendete10 = new int[tamanio];
         datoAleatorio10 = generarDatosAleatorios(tamanio);
-        datoAscendente10 = generarDatosAleatorios(tamanio);
-        datoDescendete10 = generarDatosAleatorios(tamanio);
+        datoAscendente10 = generarDatosAscendentes(tamanio);
+        datoDescendete10 = generarDatosDescendentes(tamanio);
 
         tamanio = 100;
         datoAleatorio100 = new int[tamanio];
         datoAscendente100 = new int[tamanio];
         datoDescendete100 = new int[tamanio];
         datoAleatorio100 = generarDatosAleatorios(tamanio);
-        datoAscendente100 = generarDatosAleatorios(tamanio);
-        datoDescendete100 = generarDatosAleatorios(tamanio);
+        datoAscendente100 = generarDatosAscendentes(tamanio);
+        datoDescendete100 = generarDatosDescendentes(tamanio);
 
         tamanio = 1000;
         datoAleatorio1000 = new int[tamanio];
         datoAscendente1000 = new int[tamanio];
         datoDescendete1000 = new int[tamanio];
         datoAleatorio1000 = generarDatosAleatorios(tamanio);
-        datoAscendente1000 = generarDatosAleatorios(tamanio);
-        datoDescendete1000 = generarDatosAleatorios(tamanio);
+        datoAscendente1000 = generarDatosAscendentes(tamanio);
+        datoDescendete1000 = generarDatosDescendentes(tamanio);
 
+        datoOrdenado10 = generarDatosOrdenados(10);
+        datoOrdenado100 = generarDatosOrdenados(100);
+        datoOrdenado1000 = generarDatosOrdenados(1000);
     }
 
     // #region Shell
@@ -56,9 +62,9 @@ public class ShellTests {
         int[] resultado100 = clasificar(datoAleatorio100, METODO_CLASIFICACION_SHELL);
         int[] resultado1000 = clasificar(datoAleatorio1000, METODO_CLASIFICACION_SHELL);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoOrdenado10, resultado10);
+        assertArrayEquals(datoOrdenado100, resultado100);
+        assertArrayEquals(datoOrdenado1000, resultado1000);
     }
 
     @Test
@@ -67,9 +73,9 @@ public class ShellTests {
         int[] resultado100 = clasificar(datoAscendente100, METODO_CLASIFICACION_SHELL);
         int[] resultado1000 = clasificar(datoAscendente1000, METODO_CLASIFICACION_SHELL);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoOrdenado10, resultado10);
+        assertArrayEquals(datoOrdenado100, resultado100);
+        assertArrayEquals(datoOrdenado1000, resultado1000);
     }
 
     @Test
@@ -78,9 +84,9 @@ public class ShellTests {
         int[] resultado100 = clasificar(datoDescendete100, METODO_CLASIFICACION_SHELL);
         int[] resultado1000 = clasificar(datoDescendete1000, METODO_CLASIFICACION_SHELL);
 
-        assertArrayEquals(datoAscendente10, resultado10);
-        assertArrayEquals(datoAscendente10, resultado100);
-        assertArrayEquals(datoAscendente10, resultado1000);
+        assertArrayEquals(datoDescendete10, resultado10);
+        assertArrayEquals(datoDescendete100, resultado100);
+        assertArrayEquals(datoDescendete1000, resultado1000);
     }
 
     // #endregion

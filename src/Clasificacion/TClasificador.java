@@ -51,22 +51,42 @@ public class TClasificador {
         return null;
     }
 
+    // private static int[] ordenarPorShell(int[] datosParaClasificar) {
+    //     int j, inc;
+    //     int[] incrementos = new int[] { 3223, 358, 51, 10, 3, 1 };
+
+    //     for (int posIncrementoActual = 1; posIncrementoActual < incrementos.length; posIncrementoActual++) {
+    //         inc = incrementos[posIncrementoActual];
+    //         if (inc < (datosParaClasificar.length / 2)) {
+    //             for (int i = inc; i < datosParaClasificar.length; i++) {
+    //                 j = i - inc;
+    //                 while (j >= 0) {
+    //                     if (datosParaClasificar[j] > datosParaClasificar[j + inc]) {
+    //                         intercambiar(datosParaClasificar, j, j + inc);
+    //                         j = j--;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return datosParaClasificar;
+    // }
+
+
     private static int[] ordenarPorShell(int[] datosParaClasificar) {
-        int j, inc;
+        int j;
         int[] incrementos = new int[] { 3223, 358, 51, 10, 3, 1 };
 
-        for (int posIncrementoActual = 1; posIncrementoActual < incrementos.length; posIncrementoActual++) {
-            inc = incrementos[posIncrementoActual];
-            if (inc < (datosParaClasificar.length / 2)) {
-                for (int i = inc; i < datosParaClasificar.length; i++) {
-                    j = i - inc;
-                    while (j >= 0) {
-                        if (datosParaClasificar[j] > datosParaClasificar[j + inc]) {
-                            intercambiar(datosParaClasificar, j, j + inc);
-                            j = j--;
-                        }
-                    }
+        for (int k : incrementos) {
+            int h = k;
+            for (int i = h; i < datosParaClasificar.length; i++) {
+                int aux = datosParaClasificar[i];
+                j = i - h;
+                while (j >= 0 && aux < datosParaClasificar[j]) {
+                    datosParaClasificar[j + h] = datosParaClasificar[j];
+                    j = j - h;
                 }
+                datosParaClasificar[j + h] = aux;
             }
         }
         return datosParaClasificar;
@@ -112,16 +132,16 @@ public class TClasificador {
         return datosParaClasificar;
     }
 
-    private static int[] ordenarPorHeapsort(int[] datosParaClasificar) {
-        for (int i = datosParaClasificar.length / 2; i >= 1; i--) {
-            desplazaElemento(datosParaClasificar, i, datosParaClasificar.length);
-        }
-        for (int i = datosParaClasificar.length; i >= 2; i--) {
-            intercambiar(datosParaClasificar, 1, i);
-            desplazaElemento(datosParaClasificar, 1, i);
-        }
-        return datosParaClasificar;
-    }
+    // private static int[] ordenarPorHeapsort(int[] datosParaClasificar) {
+    //     for (int i = datosParaClasificar.length / 2; i >= 1; i--) {
+    //         desplazaElemento(datosParaClasificar, i, datosParaClasificar.length);
+    //     }
+    //     for (int i = datosParaClasificar.length; i >= 2; i--) {
+    //         intercambiar(datosParaClasificar, 1, i);
+    //         desplazaElemento(datosParaClasificar, 1, i);
+    //     }
+    //     return datosParaClasificar;
+    // }
 
     private static int[] ordenarPorCuentas(int[] datosParaClasificar, int max, int min) {
         int[] freqAbs = new int[datosParaClasificar.length];
@@ -147,22 +167,27 @@ public class TClasificador {
     }
 
     private static void desplazaElemento(int[] vector, int primero, int ultimo) {
-        // int actual = primero;
-        // while (actual <= ultimo / 2) {
-        // if (ultimo == 2 * actual) {
-        // if (vector[actual] > vector[2 * actual]) {
-        // intercambiar(vector, actual, 2 * actual);
-        // }
-        // actual = ultimo;
-        // } else {
-        // int menor; // MemorHijo, falta implementar TODO
-        // if (vector[actual] > vector[menor]) {
-        // intercambiar(vector, actual, menor);
-        // } else {
+        int actual = primero;
+        while (actual <= ultimo / 2) {
+            if (ultimo == 2 * actual) {
+                if (vector[actual] > vector[2 * actual]) {
+                    intercambiar(vector, actual, 2 * actual);
+                }
+                actual = ultimo;
+            } else {
+                int menor = menorHijo(2 * actual, 2 * (actual + 1));
+                if (vector[actual] > vector[menor]) {
+                    intercambiar(vector, actual, menor);
+                    actual = menor;
+                } else {
+                    actual = ultimo;
+                }
+            }
+        }
+    }
 
-        // }
-        // }
-        // }
+    private static int menorHijo(int i, int j) {
+        return Math.min(i, j);
     }
 
     // #region Auxiliares de Heap
@@ -172,7 +197,7 @@ public class TClasificador {
             int r = primero;
             while (r <= ultimo / 2) {
                 if (ultimo == 2 * r) { // r tiene un hijo solo
-                    if (datosParaClasificar[r] > datosParaClasificar[r * 2]) {
+                    if (datosParaClasificar[r] < datosParaClasificar[r * 2]) {
                         intercambiar(datosParaClasificar, r, 2 * r);
                         r = 2;
                     } else {
@@ -180,13 +205,13 @@ public class TClasificador {
                     }
                 } else { // r tiene 2 hijos
                     int posicionIntercambio = 0;
-                    if (datosParaClasificar[2 * r] > datosParaClasificar[2 * r + 1]) {
+                    if (datosParaClasificar[2 * r] < datosParaClasificar[2 * r + 1]) {
                         posicionIntercambio = 2 * r + 1;
                     } else {
                         posicionIntercambio = 2 * r;
                     }
 
-                    if (datosParaClasificar[r] > datosParaClasificar[posicionIntercambio]) {
+                    if (datosParaClasificar[r] < datosParaClasificar[posicionIntercambio]) {
                         intercambiar(datosParaClasificar, r, posicionIntercambio);
                         r = posicionIntercambio;
                     } else {
